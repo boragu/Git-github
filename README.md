@@ -80,9 +80,10 @@ date: 날짜 및 시간
 |$ git checkout 브랜치 이름|작업 중인 브랜치를 변경하는 깃 명령어|
 |$ git merge 브랜치 이름|현재 브랜차ㅣ에 다른 브랜치의 내용을 병합하는 깃 명령어|
 |$ git branch -d 브랜치 이름|브랜치 삭제|
-
-![스크린샷 2025-03-27 122020](https://github.com/user-attachments/assets/e10860f0-4b6f-4c1d-a230-0cf2873b2b18)
-![스크린샷 2025-03-27 122009](https://github.com/user-attachments/assets/85a4b789-d26c-4b3d-88c4-3cd8899cc78a)
+<!--Table-->
+|1|2|
+|:--:|:--:|
+|![스크린샷 2025-03-27 122020](https://github.com/user-attachments/assets/e10860f0-4b6f-4c1d-a230-0cf2873b2b18)|![스크린샷 2025-03-27 122009](https://github.com/user-attachments/assets/85a4b789-d26c-4b3d-88c4-3cd8899cc78a)|
 
 ## Github
 ### What is GitHub?
