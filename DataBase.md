@@ -1,4 +1,3 @@
-# 데이터베이스
 ## 데이터베이스란? 
 - 서로 관련된 데이터들의 집합 / 특정 조직의 여러 사용자가 공유하여 사용할 수 있도록 통합해서 저장된 윤영 데이터의 집합
 
@@ -23,31 +22,32 @@
 ### 종류
 <!--Table-->
 |TYPE|Meaning|Example|
-|:--:|:--:|
+|:--:|:--:|:--:|
 |RDBMS(관계형 데이터베이스|테이터를 테이블 형식으로 구성, 행과 열로 이루어짐, SQL 언어 사용, 정확성과 일관성(ACID 원칙) 중요하게 생각|MySQL, PostgreSQL, Microsoft SQL Server, Oracle, Microsoft SQL Server ..|
-|NoSQL(Not Only SQL, 비관계형 데이터베이스)||
+|NoSQL(Not Only SQL, 비관계형 데이터베이스)|정형화되지 않은 데이터를 저장, 테이블 대신 문서, 키-값, 그래프, 컬럼 기반 구조 사용. 스키마 유연, 속도 중시 (BASE 원칙)|MongoDB, Cassandra, Redis, Couchbase, Firebase..|
 
-# SQL
 ## SQL이란? 
 - Structured Query Language의 약자. 일정한 형식으로 데이터를 정리, 도메인 특화 언어에 가깝다.
 
 ## NoSQL이란? 
  -Not Only SQL의 약자. RDBMS의 테이블 기반 구조가 아닌 다양한 데이터 모델을 지원하는 데이터베이스, 스키마 없이도 데이터 저장 가능, 확장성과 유연성, 빅데이터나 실시간 웹 애플리케이션에 주로 사용됨
+ ![스크린샷 2025-04-02 211240](https://github.com/user-attachments/assets/6254170f-afb2-4ec2-8bdf-564d8eaa7441)
 
-### SQL과 NoSQL의 차이점
 
 ### SQL과 DBMS의 차이점
+![스크린샷 2025-04-02 211249](https://github.com/user-attachments/assets/10081a33-4635-4da8-a08a-82009a63fcb7)
 
-# DBMS
-## DBMS란? Database Management System의 약자. 데이터베이스를 관리하는 시스템, 정보를 수정, 삭제, 조회 가능
 
-# ERD
-## ERD란?
+## DBMS란? 
+- Database Management System의 약자. 데이터베이스를 관리하는 시스템, 정보를 수정, 삭제, 조회 가능
+
+## ERD란? 
+- Entity-Relationship Diagram의 약자. 현실의 데이터를 개체, 속석, 관계로 나누어 표현한 데이터베이스 설계도(시각적으로 구현)
 
 ## SQL 기본 문법
 ```https://www.w3schools.com/mysql/trymysql.asp?filename=trysql_select_all```
 
-#### 자료형
+#### 1) 자료형
 ##### 1. 숫자 자료형
 <!--Table-->
 |TYPE|Byte|Signed|Unsigned|
@@ -95,10 +95,7 @@
 - 시간 데이터를 가감없이 기록할 때 DATETIME
 - 시간 자동기록, 국제적인 서비스를 할 경우 TIMESTAMP 사용
 
-#### 데이터 변경, 삭제
-
-
-#### 테이블 
+#### 3) 테이블 
 <!--Table-->
 |Code|Meaning|Example|
 |:--:|:--:|:--:|
@@ -136,7 +133,7 @@
   VALUES ('박쇳물', '아이언워터', NULL, 1);
   -- nickname에 NULL, '아이언수' 넣어보기```
 
-#### 데이터 조회
+#### 4) 데이터 조회
 <!--Table-->
 |Code|Meaning|Example|
 |:--:|:--:|:--:|
@@ -150,20 +147,82 @@
 ||원하는 별병으로 데이터 가져오기 한글은 ''안에 널기|```SELECT CustomerId AS ID, CustomerName AS NAME, Address AS ADDR FROM Customers;```|
 |||```SELECT CustomerID AS '아이디', CustomerName AS '고객명', City AS '도시', Country AS '국가' FROM Customers WHERE City = 'London' OR Country = 'Mexico' ORDER BY CustomerName LIMIT 0, 5;```|
 
-#### 연산자
+#### 5) 연산자
 <!--Table-->
 |Code|Meaning|Example|
 |:--:|:--:|:--:|
-|--|주석||
+|+-*/|각각 더하기, 빼기, 곱하기, 나누기|```SELECT 5 - 2.5 AS DIFFERENCE;```|
+|% MOD|나머지|SELECT 10 % 3;|
+||||
+|IS|양쪽이 모두 TRUE 또는 FALSE|```SELECT TRUE IS TRUE;```|
+|IS NOT||한쪽은 TRUE, 한쪽은 FALSE|```SELECT (TRUE IS FALSE) IS NOT TRUE;```|
+|AND, &&|양쪽이 모두 TRUE일 때만 TRUE|```SELECT TRUE AND FALSE, TRUE OR FALSE;```|
+|OR(||) |한쪽이 TRUE면 TRUE|```SELECT 2 + 3 = 6 OR 2 * 3 = 6;```|
+|=|양쪽 값이 같음|```SELECT 1 = 1, !(1 <> 1), NOT (1 < 2), 1 > 0 IS NOT FALSE;```|
+|!=, <>|양쪽 값이 다름|```SELECT 'A' = 'A', 'A' != 'B', 'A' < 'B', 'A' > 'B';```|
+|>,<|값이 더 큼|```SELECT 'Apple' > 'Banana' OR 1 < 2 IS TRUE;```|
+|>=,<=|값이 같거나 더 큼||
+||||
+|BETWEEN {MIN} AND {MAX}|두 값 사이에 있음|```SELECT 5 BETWEEN 1 AND 10;```|
+|NOT BETWEEN {MIN} AND {MAX}	|두 값 사이가 아닌 곳에 있음|```SELECT 'banana' NOT BETWEEN 'Apple' AND 'camera';```|
+|IN (...)|괄호 안의 값들 가운데 있음|```SELECT 1 + 2 IN (2, 3, 4) ```|
+|NOT IN (...)|괄호 안의 값들 가운데 없음||
+|LIKE '... % ...'|0~N개 문자를 가진 패턴||
+|LIKE '... _ ...'|_ 갯수만큼의 문자를 가진 패턴||
 
-#### 숫자와 문자열을 다루는 함수
+###### 문자열은 '0'으로 인식
 
-#### 시간/날짜 관련 및 기타 함수들
+#### 6) 숫자와 문자열을 다루는 함수
+<!--Table-->
+|Code|Meaning|Example|
+|:--:|:--:|:--:|
+|ROUND|반올림|```ROUND(0.5)```|
+|CEIL|올림|```CEIL(0.4)```|
+|FLOOR|내림|```FLOOR(0.6);```|
+|ABS|절댓값|```SELECT ABS(1), ABS(-1), ABS(3 - 10);```|
+|GREATEST|가장 큰 값|```GREATEST(1, 2, 3)```|
+|LEAST|가장 작은 |```LEAST(1, 2, 3, 4, 5);```|
+|MAX|	가장 큰 값|
+|MIN|	가장 작은 값|
+|COUNT|	갯수 (NULL값 제외)|
+|SUM|	총합|
+|AVG|	평균 값|
+||||
+|UCASE, UPPER|	모두 대문자로||
+|LCASE, LOWER|	모두 소문자로||
+|CONCAT(...)|	괄호 안의 내용 이어붙임|
+|CONCAT_WS(S, ...)|	괄호 안의 내용 S로 이어붙임|
+|LENGTH|	문자열의 바이트 길이|
+|CHAR_LENGTH, CHARACTER_LEGNTH|	문자열의 문자 길이|
 
-#### 조건에 따라 그룹으로 묶기
+#### 7)시간/날짜 관련 및 기타 함수들
+<!--Table-->
+|Code|Meaning|
+|:--:|:--:|
+|DATE|	문자열에 따라 날짜 생성|
+|TIME|	문자열에 따라 시간 생성|
+|CURRENT_DATE, CURDATE|	현재 날짜 반환|
+|CURRENT_TIME, CURTIME|	현재 시간 반환|
+|CURRENT_TIMESTAMP, NOW|	현재 시간과 날짜 반환|
+|YEAR|	주어진 DATETIME값의 년도 반환|
+|MONTHNAME|	주어진 DATETIME값의 월(영문) 반환|
+|MONTH|	주어진 DATETIME값의 월 반환|
+|WEEKDAY|	주어진 DATETIME값의 요일값 반환(월요일: 0)|
+|DAYNAME|	주어진 DATETIME값의 요일명 반환|
+|DAYOFMONTH, DAY|	주어진 DATETIME값의 날짜(일) 반환|
+|HOUR|	주어진 DATETIME의 시 반환|
+|MINUTE|	주어진 DATETIME의 분 반환|
+|SECOND|	주어진 DATETIME의 초 반환|
+
+#### 8) 조건에 따라 그룹으로 묶기
+GROUP BY -조건에 따라 집계된 값 가져오기
+WITH ROLLUP -전체의 집계값
+HAVING -그룹화된 데이터 걸러내기
+DISTINCT -중복된 값들 제거
+
 
 ```
-심화 공
+심화
 1. 쿼리 안에 서브쿼리
 2. JOIN
 3. UNION
